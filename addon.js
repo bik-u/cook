@@ -45,6 +45,22 @@ function check_m_type(m_type, sub_count, dub_count) {
 	return true
 }
 
+async function decrypt() {
+	const decrypt = await (
+      await axios.get("https://github.com/enimax-anime/key/blob/e6/key.txt")
+    ).data;
+
+    const blobString = '"blob-code blob-code-inner js-file-line">';
+    const afterIndex = decrypt.indexOf(
+      '"blob-code blob-code-inner js-file-line">'
+    );
+    const newblobString =
+      afterIndex == -1 ? "" : decrypt.substring(afterIndex + blobString.length);
+    const beforeIndex = newblobString.indexOf("</td>");
+    let decryptKey =
+      beforeIndex == -1 ? "" : newblobString.substring(0, beforeIndex);
+	console.log(decryptKey)
+}
 
 builder.defineStreamHandler(async({type, id}) => {
 	console.log("request for streams: "+type+" "+id)
@@ -122,6 +138,7 @@ builder.defineStreamHandler(async({type, id}) => {
 			})
 	}
 
+	await decrypt()
 	return {streams}
 })
 
