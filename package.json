@@ -1,0 +1,13 @@
+{
+	"name": "stremio-addon-aniwav",
+	"version": "0.0.1",
+	"description": "Stream anime from aniwav",
+	"scripts": {
+		"start": "node server.js"
+	},
+	"dependencies": {
+		"axios": "^1.5.1",
+		"dotenv": "^16.3.1",
+		"stremio-addon-sdk": "1.1.x"
+	}
+}
